@@ -1,0 +1,218 @@
+FORMAT: 1A
+HOST: https://polls.apiblueprint.org/
+
+# MyPlantNote
+
+使用者可以透過此程式設定植物資訊、澆水頻率。此專案為 MyPlantNote 後端，提供登入、awt 驗證、植物管理等一系列api。
+
+## Get & Post a Plant [/api/plant/]
+`/api/plant`
+
+### List Plants [GET]
+根據 id 搜尋plant，若無指定 id 則列出所有plant。
++ Parameters
+    + id (optional, string, `64ec14b96845963ad29c8e42`) ... plant id
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "姬嚴龍",
+                "type": "龍舌蘭",
+                "owner": "64e5b84905bfe0cd6a203604",
+                "startDate": "2023-08-28T03:30:01.938Z",
+                "lastWateringDate": "2023-08-28T03:30:01.938Z",
+                "wateringPeriod": "1d",
+                "_id": "64ec14b96845963ad29c8e42",
+                "createDate": "2023-08-28T03:30:01.938Z",
+                "lastModifiedDate": "2023-08-28T03:30:01.938Z",
+                "__v": 0
+            }
+        ]
+
+### Create a New Plant [POST]
+新增 plant。
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+
+    + Body
+
+            {
+              "name": "姬嚴龍",
+              "type": "龍舌蘭",
+              "startDate": "",
+              "lastWateringDate": "",
+              "wateringPeriod": ""
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "name": "姬嚴龍",
+                "type": "龍舌蘭",
+                "owner": "64e5b84905bfe0cd6a203604",
+                "startDate": "2023-08-28T03:30:01.938Z",
+                "lastWateringDate": "2023-08-28T03:30:01.938Z",
+                "wateringPeriod": "1d",
+                "_id": "64ec14b96845963ad29c8e42",
+                "createDate": "2023-08-28T03:30:01.938Z",
+                "lastModifiedDate": "2023-08-28T03:30:01.938Z",
+                "__v": 0
+            }
+
+## Delete & Patch a Plant [/api/plant/{id}]
+`/api/plant/{id}`
+
+### Delete Plant [DELETE]
+根據 id 刪除plant。
++ Parameters
+    + id (required, string, `64ec14b96845963ad29c8e42`) ... plant id (`id`)
+
++ Request
+
+    + Headers
+
+            Authentication: Bearer JWT
+
++ Response 200 (application/json)
+
+            {
+                "message": "Delete a plant success"
+            }
+
+### Update Plant [PATCH]
+根據 id 修改plant。
++ Parameters
+    + id (required, string, `64ec14b96845963ad29c8e42`) ... plant id (`id`)
+
++ Request
+
+    + Headers
+
+            Authentication: Bearer JWT
+
+    + Body
+
+            {
+                "name": "姬嚴龍_modify",
+                "type": "",
+                "startDate": "",
+                "lastWateringDate": "",
+                "wateringPeriod": ""
+            }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "64ec14b96845963ad29c8e42",
+            "name": "姬嚴龍_modify",
+            "type": "64e8156a5b0c210d67908958",
+            "owner": "64e5b84905bfe0cd6a203604",
+            "startDate": "2023-08-28T03:30:01.938Z",
+            "lastWateringDate": "2023-08-28T03:30:01.938Z",
+            "wateringPeriod": "1d",
+            "createDate": "2023-08-28T03:30:01.938Z",
+            "lastModifiedDate": "2023-08-28T03:56:07.289Z",
+            "__v": 0
+        }
+
+## Get & Post a User [/api/user/]
+`/api/user`
+
+### List Users [GET]
+根據 id 搜尋user，若無指定 id 則列出所有user。
++ Parameters
+    + id (optional, string, `64e5b84905bfe0cd6a203604`) ... user id
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "64e5b84905bfe0cd6a203604",
+                "name": "bruce",
+                "email": "123@gmail.com",
+                "password": "$2b$10$kZe.4mxG9.KjEmSK4aeA5OE./WDl04qir.VdSSYz1joe6gik1SbDG",
+                "createDate": "2023-08-23T07:42:01.202Z",
+                "__v": 0,
+                "lastModifiedDate": "2023-08-25T07:16:19.127Z"
+            }
+        ]
+
+### Create a New User [POST]
+新增 user。
++ Request (application/json)
+    + Body
+
+            {
+                "name": "bruce",
+                "email": "123@gmail.com",
+                "password": "123"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "_id": "64e5b84905bfe0cd6a203604",
+                "name": "bruce",
+                "email": "123@gmail.com",
+                "password": "$2b$10$kZe.4mxG9.KjEmSK4aeA5OE./WDl04qir.VdSSYz1joe6gik1SbDG",
+                "createDate": "2023-08-23T07:42:01.202Z",
+                "__v": 0,
+                "lastModifiedDate": "2023-08-25T07:16:19.127Z"
+            }
+
+## User Login [/api/user/login]
+`/api/user/login`
+
+### Login [POST]
+使用者登入
++ Request (application/json)
+
+    + Body
+
+            {
+                "email": "123@gmail.com",
+                "password": "123"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "message": "login success",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI2NGU1Yjg0OTA1YmZlMGNkNmEyMDM2MDQiLCJ1c2VyX25hbWUiOiJicnVjZSsrIiwidXNlcl9tYWlsIjoiMTIzQGdtYWlsLmNvbSJ9LCJleHAiOjE2OTMyMDU0NDgsImlhdCI6MTY5MzIwNDU0OH0.OVSBaL-CUD7eALrqktV-naOVRfbDIcYHWVcjVJxqO6c"
+            }
+
+## Update User [/api/user/update]
+`/api/user/update`
+
+### Update User Data [PATCH]
+修改使用者資料
++ Request (application/json)
+
+    + Body
+
+            {
+                "name": bruce_modify,
+                "email": "1234@gmail.com",
+                "password": "123"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+            {
+                "_id": "64e5b84905bfe0cd6a203604",
+                "name": "bruce_modify",
+                "email": "1234@gmail.com",
+                "password": "$2b$10$kZe.4mxG9.KjEmSK4aeA5OE./WDl04qir.VdSSYz1joe6gik1SbDG",
+                "createDate": "2023-08-23T07:42:01.202Z",
+                "__v": 0,
+                "lastModifiedDate": "2023-08-25T07:16:19.127Z"
+            }
