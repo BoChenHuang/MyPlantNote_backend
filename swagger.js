@@ -13,6 +13,18 @@ const doc = {
         {
             name: "Type",
             description: "植物類型設定"
+        },
+        {
+            name: "Note",
+            description: "筆記管理"
+        },
+        {
+            name: "Article",
+            description: "文章管理"
+        },
+        {
+            name: "Picture",
+            description: "照片管理"
         }
     ]
 }

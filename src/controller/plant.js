@@ -38,10 +38,10 @@ const getPersonalPlant = async (req, res) => {
     };
     if (type) queryParams.type = type;
 
-    const plants = await Plant.find(queryParams);
+    const plants = await Plant.find(queryParams).populate(['type', 'notes', 'pictures']).exec();
     res.status(200).json(plants);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json(err);
   }
 };
 

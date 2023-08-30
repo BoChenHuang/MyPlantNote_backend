@@ -8,4 +8,4 @@ const typeSchema = new Schema({
   createDate: { type: Date, default: Date.now, required: true },
 });
 
-export default mongoose.model("type", typeSchema);
+export default mongoose.model("Type", typeSchema);

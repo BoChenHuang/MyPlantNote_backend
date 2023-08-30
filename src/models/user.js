@@ -20,4 +20,4 @@ const userSchema = new  mongoose.Schema({
     lastModifiedDate: {type: Date, default: Date.now, required: true}
 })
 
-export default mongoose.model("user", userSchema);
+export default mongoose.model("User", userSchema);
