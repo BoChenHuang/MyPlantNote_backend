@@ -6,8 +6,10 @@ const router = express.Router();
 
 // for admin
 router.get("/", noteController.getNotes);
-// router.get("/:id", plantController.getPlanById);
 
 //TODO 需登入的操作
+router.post("/:plantId", ensureToken, noteController.postNote);
+router.patch("/:id", ensureToken, noteController.updateNote);
+router.delete("/:id", ensureToken, noteController.deleteNote);
 
 export default router;
