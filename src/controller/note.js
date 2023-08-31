@@ -55,8 +55,8 @@ const updateNote = async (req, res) => {
   try {
     const decodeed = await verifyToken(token);
     const queryParams = {
-        _id: id,
-        author: decodeed.payload.user_id
+      _id: id,
+      author: decodeed.payload.user_id,
     };
     const data = {
       title: req.body.title ? req.body.title : undefined,
@@ -74,29 +74,29 @@ const updateNote = async (req, res) => {
 };
 
 const deleteNote = async (req, res) => {
-    const token = req.token;
-    const id = req.params.id;
-    try {
-      const decodeed = await verifyToken(token);
-      const queryParams = {
-          _id: id,
-          author: decodeed.payload.user_id
-      };
-      // 欲刪除的 note
-      const note = await Note.findOne(queryParams);
-      console.log(note);
-      // 移除在 plant.notes 中的紀錄
-      const plant = await Plant.findOne({_id: note.plantId, owner: decodeed.payload.user_id});
-      const index = plant.notes.indexOf(id);
-      if(index)
-        plant.notes.splice(index, 1);
-      await note.deleteOne();
-      await plant.save();
-      res.status(200).json("Delete note sucess");
-    } catch (err) {
-      console.log(err);
-      res.status(500).send(err);
-    }
-  };
+  const token = req.token;
+  const id = req.params.id;
+  try {
+    const decodeed = await verifyToken(token);
+    const queryParams = {
+      _id: id,
+      author: decodeed.payload.user_id,
+    };
+    // 欲刪除的 note
+    const note = await Note.findOne(queryParams);
+    const plant = await Plant.findOne({
+      _id: note.plantId,
+      owner: decodeed.payload.user_id,
+    });
+    const index = plant.notes.indexOf(id);
+    if (index) plant.notes.splice(index, 1);
+    await note.deleteOne();
+    await plant.save();
+    res.status(200).json("Delete note sucess");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
 
 export default { getNotes, postNote, updateNote, deleteNote };

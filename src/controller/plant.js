@@ -105,6 +105,7 @@ const updatePlant = async (req, res) => {
     });
     res.status(200).json(updatedPlant);
   } catch (err) {
+    console.log(err);
     res.status(500).send(err);
   }
 };

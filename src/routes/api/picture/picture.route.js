@@ -6,8 +6,8 @@ const router = express.Router();
 
 // for admin
 router.get("/", pictureController.getPicture);
-// router.get("/:id", plantController.getPlanById);
 
-//TODO 需登入的操作
+// 需登入的操作
+router.post("plant/:id",ensureToken, pictureController.addPictureToPlant);
 
 export default router;

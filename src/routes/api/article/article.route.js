@@ -7,7 +7,7 @@ const router = express.Router();
 // for admin
 router.get("/", articleController.getArticle);
 
-//TODO 需登入的操作
+// 需登入的操作
 router.post("/", ensureToken, articleController.postArticle);
 router.patch("/:id", ensureToken, articleController.updateArticle);
 router.delete("/:id", ensureToken, articleController.deleteArticle);
