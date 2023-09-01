@@ -47,7 +47,11 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const token = req.token;
-  const data = { ...req.body, lastModifiedDate: Date.now() };
+  const data = {
+    name: req.body.name? req.body.name : undefined,
+    password: req.body.password? req.body.password : undefined,
+    lastModifiedDate: Date.now()
+  };
 
   try {
     const decodeed = await verifyToken(token);

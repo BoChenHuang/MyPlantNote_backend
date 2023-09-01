@@ -84,6 +84,7 @@ const deleteNote = async (req, res) => {
     };
     // 欲刪除的 note
     const note = await Note.findOne(queryParams);
+    // 移除 plant 中的紀錄
     const plant = await Plant.findOne({
       _id: note.plantId,
       owner: decodeed.payload.user_id,
