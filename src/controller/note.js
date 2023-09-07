@@ -84,16 +84,20 @@ const deleteNote = async (req, res) => {
     };
     // 欲刪除的 note
     const note = await Note.findOne(queryParams);
-    // 移除 plant 中的紀錄
-    const plant = await Plant.findOne({
-      _id: note.plantId,
-      owner: decodeed.payload.user_id,
-    });
-    const index = plant.notes.indexOf(id);
-    if (index) plant.notes.splice(index, 1);
-    await note.deleteOne();
-    await plant.save();
-    res.status(200).json("Delete note sucess");
+    if (note == null)
+      res.status(404).json({ message: `Can not find note by id: ${id}` });
+    else {
+      // 移除 plant 中的紀錄
+      const plant = await Plant.findOne({
+        _id: note.plantId,
+        owner: decodeed.payload.user_id,
+      });
+      const index = plant.notes.indexOf(id);
+      if (index !== -1) plant.notes.splice(index, 1);
+      await note.deleteOne();
+      await plant.save();
+      res.status(200).json("Delete note sucess");
+    }
   } catch (err) {
     console.log(err);
     res.status(500).send(err);

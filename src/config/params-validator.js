@@ -66,88 +66,117 @@ export default {
   //PATCH /api/user/
   updateUser: {
     body: Joi.object({
-        name: Joi.string().required(),
-        password: Joi.string().required(),
-    })
+      name: Joi.string().required(),
+      password: Joi.string().required(),
+    }),
   },
   // GET /api/article
   getArticle: {
     query: Joi.object({
-        id: Joi.string().hex().length(24),
-    })
+      id: Joi.string().hex().length(24),
+    }),
   },
   // POST /api/article
   createArticle: {
     body: Joi.object({
-        title: Joi.string().required(),
-        pictures: Joi.array().items(Joi.string().hex().length(24)),
-        plantType: Joi.string().hex().length(24).required(),
-        content: Joi.string().required(),
+      title: Joi.string().required(),
+      pictures: Joi.array().items(Joi.string().hex().length(24)),
+      plantType: Joi.string().hex().length(24).required(),
+      content: Joi.string().required(),
     }),
   },
   // PATCH /api/article/:id
   updateArticle: {
     params: Joi.object({
-        id: Joi.string().hex().length(24).required()
+      id: Joi.string().hex().length(24).required(),
     }),
     body: Joi.object({
-        title: Joi.string(),
-        pictures: Joi.array().items(Joi.string().hex().length(24)),
-        plantType: Joi.string().hex().length(24),
-        content: Joi.string(),
+      title: Joi.string(),
+      pictures: Joi.array().items(Joi.string().hex().length(24)),
+      plantType: Joi.string().hex().length(24),
+      content: Joi.string(),
     }),
   },
   // DELETE /api/article/:id
   deleteArticle: {
     params: Joi.object({
-        id: Joi.string().hex().length(24).required()
+      id: Joi.string().hex().length(24).required(),
     }),
   },
   // GET /api/articl/personal
   getPersonalArticle: {
     query: Joi.object({
-        type: Joi.string().hex().length(24)
-    })
+      type: Joi.string().hex().length(24),
+    }),
   },
   // GET /api/note
   getNote: {
     query: Joi.object({
-        id: Joi.string().hex().length(24)
-    })
+      id: Joi.string().hex().length(24),
+    }),
   },
   // POST /api/note/:plantId
   createNote: {
     params: Joi.object({
-        plantId: Joi.string().hex().length(24).required()
+      plantId: Joi.string().hex().length(24).required(),
     }),
-    body: {
-        title: Joi.string().required(),
-        pictures: Joi.array().items(Joi.string().hex().length(24)),
-        content: Joi.string().required(),
-    }
+    body: Joi.object({
+      title: Joi.string().required(),
+      pictures: Joi.array().items(Joi.string().hex().length(24)),
+      content: Joi.string().required(),
+    }),
   },
   // PATCH /api/note/:id
   updateNote: {
     params: Joi.object({
-        id: Joi.string().hex().length(24).required()
+      id: Joi.string().hex().length(24).required(),
     }),
-    body: {
-        title: Joi.string(),
-        pictures: Joi.array().items(Joi.string().hex().length(24)),
-        content: Joi.string(),
-    }
+    body: Joi.object({
+      title: Joi.string(),
+      pictures: Joi.array().items(Joi.string().hex().length(24)),
+      content: Joi.string(),
+    }),
   },
   // DELETE /api/note/:id
   deleteNote: {
     params: Joi.object({
-        id: Joi.string().hex().length(24).required()
-    })
+      id: Joi.string().hex().length(24).required(),
+    }),
   },
   // GET /api/picture
   getPicture: {
     query: Joi.object({
-        id: Joi.string().hex().length(24)
-    })
+      id: Joi.string().hex().length(24),
+    }),
   },
-  //TODO POST /api/picture/plant/:id
+  // POST /api/picture/
+  createPicture: {
+    body: Joi.object({
+      pictureList: Joi.array().items(
+        Joi.object({
+          fileName: Joi.string(),
+          fileSize: Joi.string(),
+          base64: Joi.string(),
+        })
+      ),
+    }),
+  },
+  // POST /api/picture/add
+  addPictureToTarget: {
+    body: Joi.object({
+      targets: Joi.array().items(
+        Joi.object({
+          type: Joi.string(),
+          id: Joi.string().hex().length(24),
+        })
+      ),
+      pictureIdList: Joi.array().items(Joi.string().hex().length(24)),
+    }),
+  },
+  // DELETE /api/picture
+  deletePicture: {
+    body: Joi.object({
+      pictureIdList: Joi.array().items(Joi.string().hex().length(24)),
+    }),
+  },
 };
