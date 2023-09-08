@@ -57,11 +57,21 @@ const addPictureToTarget = async (req, res) => {
       const entity = await getEntityFromTarget(target, userId);
       if (entity) entityList.push(entity);
       else {
-        res.status(404).json({ message: `Target: ${target} not found` });
+        res.status(404).json({ message: `Target: ${JSON.stringify(target)} not found` });
         return;
       }
     }
 
+    // check piture exist
+    for (const pictureId of pictureIdList) {
+      const picture = await Picture.findById(pictureId);
+      if (!picture) {
+        res.status(404).json({ message: `Picture: ${pictureId} not found` })
+        return;
+      }
+    }
+
+    // append piture to target's piture list
     for (const entity of entityList) {
       for (const pictureId of pictureIdList) {
         if (entity.pictures.indexOf(pictureId) === -1)
@@ -85,6 +95,7 @@ const deletePicture = async (req, res) => {
     const userId = decodeed.payload.user_id;
 
     const entities = await getAllConatainPictureEntities(userId);
+
     for (const pictureId of pictureIdList) {
       for (const entity of entities) {
         const index = entity.pictures.indexOf(pictureId);
