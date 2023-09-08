@@ -5,7 +5,7 @@ HOST: https://polls.apiblueprint.org/
 
 使用者可以透過此程式設定植物資訊、澆水頻率。此專案為 MyPlantNote 後端，提供登入、awt 驗證、植物管理等一系列api。
 
-## Get & Post a Plant [/api/plant/]
+## Get, Delete & Patch Plant [/api/plant/{id}]
 `/api/plant`
 
 ### List Plants [GET]
@@ -29,7 +29,61 @@ HOST: https://polls.apiblueprint.org/
                 "__v": 0
             }
         ]
+### Delete Plant [DELETE]
+根據 id 刪除plant。
++ Parameters
+    + id (required, string, `64ec14b96845963ad29c8e42`) ... plant id
 
++ Request
+
+    + Headers
+
+            Authentication: Bearer JWT
+
++ Response 200 (application/json)
+
+            {
+                "message": "Delete a plant success"
+            }
+            
+
+### Update Plant [PATCH]
+根據 id 修改plant。
++ Parameters
+    + id (required, string, `64ec14b96845963ad29c8e42`) ... plant id
+
++ Request
+
+    + Headers
+
+            Authentication: Bearer JWT
+
+    + Body
+
+            {
+                "name": "姬嚴龍_modify",
+                "type": "",
+                "startDate": "",
+                "lastWateringDate": "",
+                "wateringPeriod": ""
+            }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "64ec14b96845963ad29c8e42",
+            "name": "姬嚴龍_modify",
+            "type": "64e8156a5b0c210d67908958",
+            "owner": "64e5b84905bfe0cd6a203604",
+            "startDate": "2023-08-28T03:30:01.938Z",
+            "lastWateringDate": "2023-08-28T03:30:01.938Z",
+            "wateringPeriod": "1d",
+            "createDate": "2023-08-28T03:30:01.938Z",
+            "lastModifiedDate": "2023-08-28T03:56:07.289Z",
+            "__v": 0
+        }
+
+## Post a Plant [/api/plant/]
 ### Create a New Plant [POST]
 新增 plant。
 + Request (application/json)
@@ -64,46 +118,19 @@ HOST: https://polls.apiblueprint.org/
                 "__v": 0
             }
 
-## Delete & Patch a Plant [/api/plant/{id}]
-`/api/plant/{id}`
+## Get Personal Plant [/api/plant/personal/{type}]
+`/api/plant/personal`
 
-### Delete Plant [DELETE]
-根據 id 刪除plant。
+### List Personal Plant [GET]
+取得屬於user的所有plant，若有攜帶type則指定搜尋的植物類型，否則為所有類型。
 + Parameters
-    + id (required, string, `64ec14b96845963ad29c8e42`) ... plant id (`id`)
+    + type (optional ,string, `64e8156a5b0c210d67908958`) ... type id
 
 + Request
 
     + Headers
 
             Authentication: Bearer JWT
-
-+ Response 200 (application/json)
-
-            {
-                "message": "Delete a plant success"
-            }
-
-### Update Plant [PATCH]
-根據 id 修改plant。
-+ Parameters
-    + id (required, string, `64ec14b96845963ad29c8e42`) ... plant id (`id`)
-
-+ Request
-
-    + Headers
-
-            Authentication: Bearer JWT
-
-    + Body
-
-            {
-                "name": "姬嚴龍_modify",
-                "type": "",
-                "startDate": "",
-                "lastWateringDate": "",
-                "wateringPeriod": ""
-            }
 
 + Response 200 (application/json)
 
@@ -119,8 +146,8 @@ HOST: https://polls.apiblueprint.org/
             "lastModifiedDate": "2023-08-28T03:56:07.289Z",
             "__v": 0
         }
-
-## Get & Post a User [/api/user/]
+            
+## Get User [/api/user/{id}]
 `/api/user`
 
 ### List Users [GET]
@@ -141,7 +168,7 @@ HOST: https://polls.apiblueprint.org/
                 "lastModifiedDate": "2023-08-25T07:16:19.127Z"
             }
         ]
-
+## Post a User [/api/user/]
 ### Create a New User [POST]
 新增 user。
 + Request (application/json)
@@ -184,6 +211,7 @@ HOST: https://polls.apiblueprint.org/
 + Response 200 (application/json)
 
     + Body
+    
             {
                 "message": "login success",
                 "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOiI2NGU1Yjg0OTA1YmZlMGNkNmEyMDM2MDQiLCJ1c2VyX25hbWUiOiJicnVjZSsrIiwidXNlcl9tYWlsIjoiMTIzQGdtYWlsLmNvbSJ9LCJleHAiOjE2OTMyMDU0NDgsImlhdCI6MTY5MzIwNDU0OH0.OVSBaL-CUD7eALrqktV-naOVRfbDIcYHWVcjVJxqO6c"
@@ -199,7 +227,7 @@ HOST: https://polls.apiblueprint.org/
     + Body
 
             {
-                "name": bruce_modify,
+                "name": "bruce_modify",
                 "email": "1234@gmail.com",
                 "password": "123"
             }
@@ -207,6 +235,7 @@ HOST: https://polls.apiblueprint.org/
 + Response 200 (application/json)
 
     + Body
+    
             {
                 "_id": "64e5b84905bfe0cd6a203604",
                 "name": "bruce_modify",
@@ -216,3 +245,305 @@ HOST: https://polls.apiblueprint.org/
                 "__v": 0,
                 "lastModifiedDate": "2023-08-25T07:16:19.127Z"
             }
+
+## Get & Post Type [/api/type]
+`/api/type`
+
+### Get Type [GET]
+取得所有植物類型
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "64e8156a5b0c210d67908958",
+                "name": "塊根",
+                "public": false,
+                "owner": "64e5b84905bfe0cd6a203604",
+                "lastModifiedDate": "2023-08-25T02:43:54.152Z",
+                "createDate": "2023-08-25T02:43:54.152Z",
+                "__v": 0
+            }
+        ]
+        
+### Post Type [POST]
+建立新的植物類型
++ Request (application/json)
+
+    + Body
+    
+            {
+                "name": "塊根"
+            }
+            
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "64e8156a5b0c210d67908958",
+                "name": "塊根",
+                "public": false,
+                "owner": "64e5b84905bfe0cd6a203604",
+                "lastModifiedDate": "2023-08-25T02:43:54.152Z",
+                "createDate": "2023-08-25T02:43:54.152Z",
+                "__v": 0
+            }
+        ]
+        
+
+## Get, Update & Delete Note [/api/note/{id}]
+`/api/note`
+
+### List Note [GET]
+根據 id 搜尋note，若無指定 id 則列出所有note。
++ Parameters
+    + id (optional, string, `64ec14b96845963ad29c8e42`) ... noteId
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "姬嚴龍",
+                "type": "龍舌蘭",
+                "owner": "64e5b84905bfe0cd6a203604",
+                "startDate": "2023-08-28T03:30:01.938Z",
+                "lastWateringDate": "2023-08-28T03:30:01.938Z",
+                "wateringPeriod": "1d",
+                "_id": "64ec14b96845963ad29c8e42",
+                "createDate": "2023-08-28T03:30:01.938Z",
+                "lastModifiedDate": "2023-08-28T03:30:01.938Z",
+                "__v": 0
+            }
+        ]
+
+### Update Note [PATCH]
+根據 id 更新 Note
++ Parameters
+    + id (required, string, `64fa9624e6558e3baa294770`) ...noteId
+
++ Request
+
+    + Headers
+
+            Authentication: Bearer JWT
+    
+    + Body
+    
+            {
+                "title": "note title update",
+                "pictures": [],
+                "content": "for update testing"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "note": {
+                "plantId": "64eeed5986534943180d9b90",
+                "author": "64e5b84905bfe0cd6a203604",
+                "title": "note title update",
+                "pictures": [],
+                "content": "for update testing",
+                "_id": "64fa9624e6558e3baa294770",
+                "createDate": "2023-09-08T03:33:56.023Z",
+                "lastModifiedDate": "2023-09-08T03:33:56.023Z",
+                "__v": 0
+            },
+            "plant": "64eeed5986534943180d9b90"
+        }
+        
+### Delete Note [DELETE]
+根據 id 刪除 Note
++ Parameters
+    + id (required, string, `64fa9624e6558e3baa294770`) ...noteId
+
++ Request
+
+    + Headers
+
+            Authentication: Bearer JWT
+
++ Response 200 (application/json)
+
+        {
+            "message": "Delete note sucess"
+        }
+        
+
+## Post Note [/api/note/{plantId}]
+`/api/note/{plantId}`
+
+### Create Note [POST]
+在指定的植物下建立新的筆記
++ Parameters
+    + plantId (required, string, `64eeed5986534943180d9b90`) ...plantId
+
++ Request
+
+    + Headers
+
+            Authentication: Bearer JWT
+    
+    + Body
+    
+            {
+                "title": "note title",
+                "pictures": [],
+                "content": "for testing"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "note": {
+                "plantId": "64eeed5986534943180d9b90",
+                "author": "64e5b84905bfe0cd6a203604",
+                "title": "note title",
+                "pictures": [],
+                "content": "for testing",
+                "_id": "64fa9624e6558e3baa294770",
+                "createDate": "2023-09-08T03:33:56.023Z",
+                "lastModifiedDate": "2023-09-08T03:33:56.023Z",
+                "__v": 0
+            },
+            "plant": "64eeed5986534943180d9b90"
+        }
+        
+## Get, Update & Delete Article [/api/article/{id}]
+`/api/article/{id}`
+
+### List Article [GET]
+根據 id 搜尋 article，若無指定 id 則列出所有 article。
+
++ Parameters
+    + id (optional, string, `64eff95e2ed9f8c50ce5c567`) ... article id
+
++ Response 200 (application/json)
+
+        [
+          {
+            "_id": "64eff95e2ed9f8c50ce5c567",
+            "title": "test1",
+            "author": "64e5b84905bfe0cd6a203604",
+            "pictures": [ ],
+            "plantType": "64e8156a5b0c210d67908958",
+            "content": "something",
+            "createDate": "2023-08-31T02:22:22.909Z",
+            "lastModifiedDate": "2023-08-31T02:22:22.910Z",
+            "__v": 1
+          }
+        ]
+
+### Update Article [PATCH]
+根據 id 更新 article
+
++ Parameters
+    + id (required, string, `64eff95e2ed9f8c50ce5c567`) ... article id
+    
++ Request
+    
+    + Headers
+
+            Authentication: Bearer JWT
+    
+    + Body
+    
+            {
+              "title": "for update testing",
+            }
+    
++ Response 200 (application/json)
+
+          {
+            "_id": "64eff95e2ed9f8c50ce5c567",
+            "title": "for update testing",
+            "author": "64e5b84905bfe0cd6a203604",
+            "pictures": [ ],
+            "plantType": "64e8156a5b0c210d67908958",
+            "content": "something",
+            "createDate": "2023-08-31T02:22:22.909Z",
+            "lastModifiedDate": "2023-08-31T02:22:22.910Z",
+            "__v": 1
+          }
+          
+### Delete Article [DELETE]
+根據 id 刪除 article
+
++ Parameters
+    + id (required, string, `64eff95e2ed9f8c50ce5c567`) ... article id
+    
++ Request
+    
+    + Headers
+
+            Authentication: Bearer JWT
+    
++ Response 200 (application/json)
+
+            {
+                "message": "Delete article success"
+            }
+            
+## Post Article [/api/article/]
+`/api/article`
+
+### Create Article [POST]
+建立新文章
+
++ Request
+    
+    + Headers
+
+            Authentication: Bearer JWT
+    
+    + Body
+    
+            {
+              "title": "post testing",
+              "pictures": [],
+              "plantType": "64e8156a5b0c210d67908958",
+              "content": "for post testing"
+            }
+            
++ Response 200 (application/json)
+
+            {            
+              "title": "post testing",
+              "author": "64e5b84905bfe0cd6a203604",
+              "pictures": [],
+              "plantType": "64e8156a5b0c210d67908958",
+              "content": "for post testing",
+              "_id": "64fa9e3407b41a2e01b1977c",
+              "createDate": "2023-09-08T04:08:20.761Z",
+              "lastModifiedDate": "2023-09-08T04:08:20.761Z",
+              "__v": 0
+            }
+
+## Get Personal Article [/api/article/personal]
+`/api/article/personal`
+
+### List Personal Article [GET]
+列出使用者的所有文章
+
++ Parameters
+    + plantType (optional, string, `64e8156a5b0c210d67908958`) ... plant type id
+    
++ Request
+    
+    + Headers
+
+            Authentication: Bearer JWT
+            
++ Response 200 (application/json)
+            [
+                {            
+                  "title": "post testing",
+                  "author": "64e5b84905bfe0cd6a203604",
+                  "pictures": [],
+                  "plantType": "64e8156a5b0c210d67908958",
+                  "content": "for post testing",
+                  "_id": "64fa9e3407b41a2e01b1977c",
+                  "createDate": "2023-09-08T04:08:20.761Z",
+                  "lastModifiedDate": "2023-09-08T04:08:20.761Z",
+                  "__v": 0
+                }
+            ]
