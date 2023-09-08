@@ -518,8 +518,8 @@ HOST: https://polls.apiblueprint.org/
               "__v": 0
             }
 
-## Get Personal Article [/api/article/personal]
-`/api/article/personal`
+## Get Personal Article [/api/article/personal{plantType}]
+`/api/article/personal/{plantType}`
 
 ### List Personal Article [GET]
 列出使用者的所有文章
@@ -534,6 +534,7 @@ HOST: https://polls.apiblueprint.org/
             Authentication: Bearer JWT
             
 + Response 200 (application/json)
+
             [
                 {            
                   "title": "post testing",
@@ -546,4 +547,136 @@ HOST: https://polls.apiblueprint.org/
                   "lastModifiedDate": "2023-09-08T04:08:20.761Z",
                   "__v": 0
                 }
+            ]
+            
+            
+## Get Picture [/api/picture/{id}]
+`/api/picture/{id}`
+
+### List Piture [GET]
+根據 id 列出 picture，若無指定則列出所有picture
+
++ Parameters
+    + id (optional, string, `64f0498805272ca8fccf0348`) ... picture id
+    
++ Response 200 (application/json)
+
+            {
+              "_id": "64f0498805272ca8fccf0348",
+              "fileName": "test",
+              "fileSize": 123,
+              "base64": "test of base64",
+              "createDate": "2023-08-31T08:04:24.998Z",
+              "__v": 0
+            }
+            
+## Post Picutre, Delete Picture & Append Picture to target [/api/piture]
+`/api/picuture`
+
+### Create Picture [POST]
+新增picture
+
++ Request
+    
+    + Headers
+
+            Authentication: Bearer JWT
+            
+    + Body
+    
+            {
+              "pictureList": [
+                {
+                  "fileName": "any",
+                  "fileSize": "1234",
+                  "base64": "any"
+                }
+              ]
+            }
+            
++ Response 200 (application/json)
+    
+            [
+              {
+                "owner": "64e5b84905bfe0cd6a203604",
+                "fileName": "any",
+                "fileSize": 1234,
+                "base64": "any",
+                "_id": "64facd89295da89d20e7ea6c",
+                "createDate": "2023-09-08T07:30:17.654Z",
+                "__v": 0
+              }
+            ]
+            
+
+### Delete Picture [DELETE]
+刪除 picture
+
++ Request
+    
+    + Headers
+
+            Authentication: Bearer JWT
+            
+    + Body
+    
+            {
+              "pictureIdList": [
+                "64facd89295da89d20e7ea6c"
+              ]
+            }
+
++ Response 200 (application/json)
+    
+            {
+              "message": "Delete success"
+            }
+            
+
+### Append Picture to target [POST]
+將 picture 加入指定物件的相簿中
+
++ Request
+    
+    + Headers
+
+            Authentication: Bearer JWT
+            
+    + Body
+    
+            {
+              "targets": [
+                {
+                  "type": "plant",
+                  "id": "64eeed5986534943180d9b90"
+                }
+              ],
+              "pictureIdList": [
+                "64f7e1659ab9c846a2cc5d43"
+              ]
+            }
+            
++ Response 200 (application/json)
+
+            [
+              {
+                "_id": "64eeed5986534943180d9b90",
+                "name": "逆刺1",
+                "type": "64e8156a5b0c210d67908958",
+                "owner": "64e5b84905bfe0cd6a203604",
+                "startDate": "2023-08-30T07:18:49.294Z",
+                "lastWateringDate": "2023-08-30T07:18:49.295Z",
+                "wateringPeriod": "1d",
+                "notes": [
+                  "64f040d30dba0009781c6471",
+                  "64fa9624e6558e3baa294770"
+                ],
+                "pictures": [
+                  "64f7e1410e17c89e4e72c53b",
+                  "64f7e1659ab9c846a2cc5d43",
+                ],
+                "createDate": "2023-08-30T07:18:49.295Z",
+                "lastModifiedDate": "2023-08-31T09:31:11.531Z",
+                "__v": 25
+              }
             ]
