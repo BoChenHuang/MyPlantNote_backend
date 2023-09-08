@@ -96,7 +96,7 @@ const deleteNote = async (req, res) => {
       if (index !== -1) plant.notes.splice(index, 1);
       await note.deleteOne();
       await plant.save();
-      res.status(200).json("Delete note sucess");
+      res.status(200).json({message: "Delete note sucess"});
     }
   } catch (err) {
     console.log(err);

@@ -96,7 +96,7 @@ const deletePicture = async (req, res) => {
       const picture = await Picture.findById(pictureId);
       if (picture != null) await picture.deleteOne();
     }
-    res.status(200).json("Delete success");
+    res.status(200).json({message: "Delete success"});
   } catch (err) {
     console.log(err);
     res.status(500).send(err);

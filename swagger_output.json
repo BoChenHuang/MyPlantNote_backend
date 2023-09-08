@@ -93,7 +93,7 @@
                   "example": "any"
                 },
                 "type": {
-                  "example": "any"
+                  "example": "ObjectId"
                 },
                 "startDate": {
                   "example": "any"
@@ -102,7 +102,7 @@
                   "example": "any"
                 },
                 "wateringPeriod": {
-                  "example": "any"
+                  "example": "1d"
                 }
               }
             }
@@ -179,7 +179,7 @@
                   "example": "any"
                 },
                 "type": {
-                  "example": "any"
+                  "example": "ObjectId"
                 },
                 "startDate": {
                   "example": "any"
@@ -188,7 +188,7 @@
                   "example": "any"
                 },
                 "wateringPeriod": {
-                  "example": "any"
+                  "example": "1d"
                 }
               }
             }
@@ -481,7 +481,7 @@
                   "example": "any"
                 },
                 "pictures": {
-                  "example": "any"
+                  "example": ["ObjectId"]
                 },
                 "content": {
                   "example": "any"
@@ -534,7 +534,7 @@
                   "example": "any"
                 },
                 "pictures": {
-                  "example": "any"
+                  "example": ["ObjectId"]
                 },
                 "content": {
                   "example": "any"
@@ -635,10 +635,10 @@
                   "example": "any"
                 },
                 "pictures": {
-                  "example": "any"
+                  "example": ["ObjectId"]
                 },
                 "plantType": {
-                  "example": "any"
+                  "example": "ObjectId"
                 },
                 "content": {
                   "example": "any"
@@ -688,10 +688,10 @@
                   "example": "any"
                 },
                 "pictures": {
-                  "example": "any"
+                  "example": ["ObjectId"]
                 },
                 "plantType": {
-                  "example": "any"
+                  "example": "ObjectId"
                 },
                 "content": {
                   "example": "any"
@@ -817,7 +817,7 @@
               "type": "object",
               "properties": {
                 "pictureList": {
-                  "example": "any"
+                  "example": [{"fileName": "any", "fileSize": "any", "base64": "any"}]
                 }
               }
             }
@@ -853,7 +853,7 @@
               "type": "object",
               "properties": {
                 "pictureIdList": {
-                  "example": "any"
+                  "example": ["ObjectId"]
                 }
               }
             }
@@ -891,10 +891,10 @@
               "type": "object",
               "properties": {
                 "targets": {
-                  "example": "any"
+                  "example": [{"type":"plant|note|article", "id": "ObjectId"}]
                 },
                 "pictureIdList": {
-                  "example": "any"
+                  "example": ["ObjectId"]
                 }
               }
             }
