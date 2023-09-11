@@ -1,5 +1,4 @@
 import Picture from "../models/picture";
-import Plant from "../models/plant";
 import { verifyToken } from "../service/utils";
 import {
   getEntityFromTarget,
