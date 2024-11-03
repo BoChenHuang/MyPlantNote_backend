@@ -2,7 +2,7 @@
   "name": "my-plant-note_backend",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Bruce_Huang",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -21,10 +21,18 @@
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.3.0",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/mongoose": "^10.1.0",
     "@nestjs/platform-express": "^10.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "mongoose": "^8.8.0",
+    "nest-winston": "^1.9.7",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "winston": "^3.16.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
