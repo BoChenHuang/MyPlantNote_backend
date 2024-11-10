@@ -7,6 +7,7 @@ import * as winston from 'winston';
 import 'winston-daily-rotate-file';
 import { Logger } from 'winston';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UserModule } from './user/user.module';
 import config from './config/config';
 
 
@@ -72,7 +73,7 @@ import config from './config/config';
       ),
       inject: [ConfigService, WINSTON_MODULE_PROVIDER],
     }
-  )],
+  ), UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
