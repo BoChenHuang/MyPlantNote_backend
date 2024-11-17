@@ -39,4 +39,9 @@ export class UserService {
     const deletedUser = this.userModel.findByIdAndDelete(id).exec();
     return deletedUser;
   }
+
+  async findByEmail(email: string) {
+    const user = this.userModel.findOne({email: email}).exec();
+    return user;
+  }
 }

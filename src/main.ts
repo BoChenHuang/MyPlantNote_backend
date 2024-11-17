@@ -16,6 +16,7 @@ async function bootstrap() {
 
   // swagger
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('My Plant Note')
     .setDescription('The api description of My Plant Note backend.')
     .setVersion('1.0')
