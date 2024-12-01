@@ -9,6 +9,7 @@ import { Logger } from 'winston';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { ImageModule } from './image/image.module';
 import config from './config/config';
 
 
@@ -74,7 +75,7 @@ import config from './config/config';
       ),
       inject: [ConfigService, WINSTON_MODULE_PROVIDER],
     }
-  ), UserModule, AuthModule],
+  ), UserModule, AuthModule, ImageModule],
   controllers: [AppController],
   providers: [AppService],
 })
