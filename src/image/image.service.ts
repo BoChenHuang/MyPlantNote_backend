@@ -23,8 +23,9 @@ export class ImageService {
     return 'This action adds a new image';
   }
 
-  findAll() {
-    return `This action returns all image`;
+  async findAll() {
+    const fileInfos = await this.gfs.find().toArray();;
+    return fileInfos;
   }
 
   async getInfoById(id: string) {

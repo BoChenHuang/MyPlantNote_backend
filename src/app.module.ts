@@ -10,6 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ImageModule } from './image/image.module';
+import { NoteModule } from './note/note.module';
 import config from './config/config';
 
 
@@ -75,7 +76,7 @@ import config from './config/config';
       ),
       inject: [ConfigService, WINSTON_MODULE_PROVIDER],
     }
-  ), UserModule, AuthModule, ImageModule],
+  ), UserModule, AuthModule, ImageModule, NoteModule],
   controllers: [AppController],
   providers: [AppService],
 })

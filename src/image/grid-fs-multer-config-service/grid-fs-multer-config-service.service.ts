@@ -9,6 +9,7 @@ export class GridFsMulterConfigService implements MulterOptionsFactory {
     gridFsStorage: any;
     constructor(private configService: ConfigService) {
     // 初始化 MongoDB 客戶端與 GridFS
+    // ref: https://medium.com/@khoa.phan.9xset/nestjs-file-uploading-using-multer-gridfs-7569a1b48022
     const uri = this.configService.get<string>('database.url');
     const dbName = this.configService.get<string>('database.db');
     this.gridFsStorage = new GridFsStorage({

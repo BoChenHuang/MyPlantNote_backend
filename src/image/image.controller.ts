@@ -20,7 +20,7 @@ export class ImageController {
   })) file: Express.Multer.File) {
     console.log('dto: ', dto);
     console.log('file: ', file);
-    const fileReponse = {
+    const fileResponse = {
       originalname: file.originalname,
       encoding: file.encoding,
       mimetype: file.mimetype,
@@ -34,7 +34,7 @@ export class ImageController {
       uploadDate: file.uploadDate,
       contentType: file.contentType,
     };
-    return fileReponse;
+    return fileResponse;
   }
 
   @Get()
