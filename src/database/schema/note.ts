@@ -9,6 +9,9 @@ export class Note {
     @Prop({ type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' })
     author: string;
 
+    @Prop({ type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Plant' })
+    plant: string;
+
     @Prop({ type: mongoose.Schema.Types.String, required: true})
     title: string;
 

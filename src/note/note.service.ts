@@ -5,7 +5,7 @@ import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Note } from 'src/database/schema/note';
 import { Logger } from 'winston';
 import { CreateNoteDto } from './dto/create-note.dto';
-import { UpdateNoteDto } from './dto/update-note-dto';
+import { UpdateNoteDto } from './dto/update-note.dto';
 
 @Injectable()
 export class NoteService {
